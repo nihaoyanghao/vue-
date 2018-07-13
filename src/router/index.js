@@ -12,8 +12,16 @@ Vue.use(Router)
 // 暴露
 const router = new Router({
   routes: [
-    {path: '/login', component: Login},
-    {path: '/home', component: Home}
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home
+    }
   ]
 })
 // 全局守卫
@@ -33,7 +41,10 @@ router.beforeEach((to, from, next) => {
       next()
     } else {
       // console.log(this)
-      window.location.href = 'http://localhost:8080/#/login'
+      // window.location.href = 'http://localhost:8080/#/login'
+      next({
+        name: 'login'
+      })
     }
   }
 })
