@@ -16,15 +16,25 @@ const router = new Router({
     {path: '/home', component: Home}
   ]
 })
+// 全局守卫
 router.beforeEach((to, from, next) => {
-  console.log(to)
-  console.log(next)
+  // console.log(to)
+  // console.log(from)
+  // console.log(next)
+  // 判断, 如果访问的是login登录页面 就往下进行
   if (to.path === '/login') {
     next()
-  } else {
-    // const token = window.localStorage.getItem('userInfo')
-    // if () {
-    // }
+  } else { // 如果访问的是别的页面 就需要判断有没有token
+    // 获取到token
+    const token = window.localStorage.getItem('userInfo')
+    // 判断 是否有token 如果有token的话 就往下继续执行
+    if (token) {
+      alert('输入正确')
+      next()
+    } else {
+      // console.log(this)
+      window.location.href = 'http://localhost:8080/#/login'
+    }
   }
 })
 export default router
