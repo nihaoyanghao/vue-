@@ -7,6 +7,8 @@ import Router from 'vue-router'
 import Login from '../components/login/login.vue'
 // 引入 home
 import Home from '../components/home/home.vue'
+// 引入 User
+import User from '../components/user/user.vue'
 // 使用
 Vue.use(Router)
 // 暴露
@@ -20,7 +22,14 @@ const router = new Router({
     {
       path: '/home',
       name: 'home',
-      component: Home
+      component: Home,
+      children: [
+        {
+          path: '/user',
+          name: 'user',
+          component: User
+        }
+      ]
     }
   ]
 })
@@ -37,7 +46,6 @@ router.beforeEach((to, from, next) => {
     const token = window.localStorage.getItem('userInfo')
     // 判断 是否有token 如果有token的话 就往下继续执行
     if (token) {
-      alert('输入正确')
       next()
     } else {
       // console.log(this)

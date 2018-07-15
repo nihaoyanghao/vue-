@@ -1,7 +1,16 @@
-<div>
-  <input type="text" name="username" placeholder="用户名" v-model="obj.username">
-  <br/>
-  <input type="password" name="password" placeholder="密码" v-model="obj.password">
-  <br/>
-  <input type="button" value="登录" @click="getLogin">
+<div class="login-wrap">
+  <div class="login-form">
+    <el-form :model="obj" status-icon :rules="rules2" ref="obj" label-width="100px" class="demo-ruleForm">
+      <el-form-item prop="username">
+        <el-input v-model="obj.username" auto-complete="off" placeholder="请输入你的用户名"></el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input type="password" v-model="obj.password" auto-complete="off" placeholder="请输入你的密码"></el-input>
+      </el-form-item>
+      <el-form-item class="btn">
+        <el-button type="primary" @click="submitForm('obj')">提交</el-button>
+        <el-button @click="resetForm('obj')">重置</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 </div>
